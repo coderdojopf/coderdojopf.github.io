@@ -13,9 +13,13 @@
   <body>
     <h1>T02 Formen bewegen</h1>
     <p>Bewege die Form mit der Tastatur und den Pfeiltasten: Hoch, Runter, Links, Rechts</p>
-    <p>
+    <p> Maus 
       <span id="x_koordinate">X: 0</span>
       <span id="y_koordinate">Y: 0</span>
+    </p>
+    <p> Form 
+      <span id="x_koordinate_form">X: 0</span>
+      <span id="y_koordinate_form">Y: 0</span>
     </p>
     <canvas id="spielfeld" width="300px" height="300px">Dein Browser ist zu alt</canvas>
     <script type="text/javascript">
@@ -47,16 +51,21 @@
       });
       
       
-      //Zeichne Rechteck
-      
+      // Zeichne Rechteck
+      // Startposition
       var positionX = 100;
       var positionY = 100;
+      
       var hoeheRechteck = 50;
       var breiteRechteck = 50;
+      var farbeRechteck = 'black';
       
       //einmal am anfang zeichnen
-      spielfeldContext.fillStyle = 'black';
+      spielfeldContext.fillStyle = farbeRechteck;
       spielfeldContext.fillRect(positionX, positionY, breiteRechteck, hoeheRechteck);
+      
+      $('#x_koordinate_form').text('X: ' + positionX);
+      $('#y_koordinate_form').text('Y: ' + positionY);
       
       document.addEventListener("keydown", function(evt) {
         var tastenNummer = evt.keyCode || evt.which;
@@ -87,8 +96,11 @@
         spielfeldBereinigen();
         
         //zeichne neues rechteck an neuer position
-        spielfeldContext.fillStyle = 'black';
-        spielfeldContext.fillRect(positionX, positionY,breiteRechteck,hoeheRechteck);
+        spielfeldContext.fillStyle = farbeRechteck;
+        spielfeldContext.fillRect(positionX, positionY, breiteRechteck, hoeheRechteck);
+        
+        $('#x_koordinate_form').text('X: ' + positionX);
+        $('#y_koordinate_form').text('Y: ' + positionY);
       });
     
     </script>
