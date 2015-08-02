@@ -11,8 +11,8 @@
   </head>
   
   <body>
-    <h1>T02 Formen zeichnen</h1>
-    <p>Zeichne Formen auf dem Spielfeld</p>
+    <h1>T02 Formen bewegen</h1>
+    <p>Bewege die Form mit der Tastatur und den Pfeiltasten: Hoch, Runter, Links, Rechts</p>
     <p>
       <span id="x_koordinate">X: 0</span>
       <span id="y_koordinate">Y: 0</span>
@@ -49,14 +49,39 @@
       
       //Zeichne Rechteck
       
+      var positionX = 100;
+      var positionY = 100;
+      
+      //einmal am anfang zeichnen
       spielfeldContext.fillStyle = 'black';
-      spielfeldContext.fillRect(10,40,70,50);
+      spielfeldContext.fillRect(positionX,positionY,50,50);
       
-      //Zeichne Kreis
-      
-      spielfeldContext.fillStyle = "green";
-      spielfeldContext.arc(150, 150, 50, 0, 2*Math.PI);
-      spielfeldContext.fill();
+      document.addEventListener("keydown", function(evt) {
+        var key = evt.keyCode || evt.which;
+        
+        //Pfeil hoch 38
+        //Pfeil runter 40
+        //Pfeil links 37
+        //Pfeil rechts 39
+        
+        //veraendere die Koordinaten entsprechend der gedrueckten Taste
+        if (key === 38) {
+          positionY -= 1; //zaehle eins runter
+        } else if (key === 40) {
+          positionY += 1; //zaehle eins hoch
+        } else if (key === 37) {
+          positionX -= 1; //zaehle eins runter
+        } else if (key === 39) {
+          positionX += 1; //zaehle eins hoch
+        }
+        
+        // spielfeld bereinigen
+        spielfeldBereinigen();
+        
+        //zeichne neues rechteck an neuer position
+        spielfeldContext.fillStyle = 'black';
+        spielfeldContext.fillRect(positionX,positionY,50,50);
+      });
     
     </script>
   </body>
