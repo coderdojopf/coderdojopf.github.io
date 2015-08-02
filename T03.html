@@ -51,28 +51,36 @@
       
       var positionX = 100;
       var positionY = 100;
+      var hoeheRechteck = 50;
+      var breiteRechteck = 50;
       
       //einmal am anfang zeichnen
       spielfeldContext.fillStyle = 'black';
-      spielfeldContext.fillRect(positionX,positionY,50,50);
+      spielfeldContext.fillRect(positionX, positionY, breiteRechteck, hoeheRechteck);
       
       document.addEventListener("keydown", function(evt) {
-        var key = evt.keyCode || evt.which;
+        var tastenNummer = evt.keyCode || evt.which;
         
-        //Pfeil hoch 38
-        //Pfeil runter 40
-        //Pfeil links 37
-        //Pfeil rechts 39
+        //Pfeil hoch hat Nummer 38
+        //Pfeil runter hat Nummer 40
+        //Pfeil links hat Nummer 37
+        //Pfeil rechts hat Nummer 39
         
         //veraendere die Koordinaten entsprechend der gedrueckten Taste
-        if (key === 38) {
+        if (tastenNummer === 38) {
           positionY -= 1; //zaehle eins runter
-        } else if (key === 40) {
+        } else if (tastenNummer === 40) {
           positionY += 1; //zaehle eins hoch
-        } else if (key === 37) {
+        } else if (tastenNummer === 37) {
           positionX -= 1; //zaehle eins runter
-        } else if (key === 39) {
+        } else if (tastenNummer === 39) {
           positionX += 1; //zaehle eins hoch
+        }
+        
+        //verhindere das "aus dem bild laufen"
+        if (positionX > (spielfeld.width - breiteRechteck) ) {
+          // position darf nicht groesser sein als das spielfeld minus die breite des rechtecks
+          positionX = spielfeld.width - breiteRechteck;
         }
         
         // spielfeld bereinigen
@@ -80,7 +88,7 @@
         
         //zeichne neues rechteck an neuer position
         spielfeldContext.fillStyle = 'black';
-        spielfeldContext.fillRect(positionX,positionY,50,50);
+        spielfeldContext.fillRect(positionX, positionY,breiteRechteck,hoeheRechteck);
       });
     
     </script>
