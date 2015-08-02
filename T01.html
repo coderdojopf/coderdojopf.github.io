@@ -2,7 +2,10 @@
 <html>
   
   <head>
+    <!-- Einbindung der externen Javascript Bibliothek -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	
+	<!-- CSS Quelltext ist im <style></style> Element -->
     <style>
       #spielfeld {
         background: orange;
@@ -15,6 +18,7 @@
     <p>Bewege die Maus auf dem Spielfeld</p>
     <canvas id="spielfeld" width="300px" height="300px">Dein Browser ist zu alt</canvas>
     
+	<!-- JavaScript -->
     <script type="text/javascript">
       var spielfeld = document.getElementById("spielfeld");
       var spielfeldContext = spielfeld.getContext('2d');
