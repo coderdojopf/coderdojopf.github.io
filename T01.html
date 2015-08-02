@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <style>
+      #spielfeld {
+        background: orange;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <h1>T01 Spielfeld und Koordinaten</h1>
+    <p>Bewege die Maus auf dem Spielfeld</p>
+    <canvas id="spielfeld" width="300px" height="300px">Dein Browser ist zu alt</canvas>
+    
+    <script type="text/javascript">
+      var spielfeld = document.getElementById("spielfeld");
+      var spielfeldContext = spielfeld.getContext('2d');
+      
+      function holeMausPosition(evt) {
+        //position des spielfelds
+        var rect = $(spielfeld).position();
+        //wird das fenster gescrollt?
+        var scroll = $(document).scrollTop();
+        
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top + scroll
+        };
+      }
+      
+      function spielfeldBereinigen() {
+        spielfeldContext.clearRect(0, 0, spielfeld.width, spielfeld.height);
+      }
+      
+      function zeichneText(text) {
+        spielfeldBereinigen();
+        spielfeldContext.font = '18pt Arial';
+        spielfeldContext.fillStyle = 'blue';
+        spielfeldContext.fillText(text, 10, 150);
+      }
+      
+      spielfeld.addEventListener("mousemove", function(evt) {
+        var mausposition = holeMausPosition(evt);
+        
+        //position runden
+        var nachricht = 'X: ' + Math.round(mausposition.x) + ' Y: ' + Math.round(mausposition.y);
+
+        zeichneText(nachricht);
+      });
+    </script>
+  </body>
+
+</html>
