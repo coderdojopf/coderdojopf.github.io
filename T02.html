@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <style>
+      #spielfeld {
+         background: orange;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <h1>T02 Formen</h1>
+    <p>Zeichne Formen auf dem Spielfeld</p>
+    <p>
+      <span id="x_koordinate">X: 0</span>
+      <span id="y_koordinate">Y: 0</span>
+    </p>
+    <canvas id="spielfeld" width="300px" height="300px">Dein Browser ist zu alt</canvas>
+    <script type="text/javascript">
+      var spielfeld = document.getElementById("spielfeld");
+      var spielfeldContext = spielfeld.getContext('2d');
+      
+      function holeMausPosition(evt) {
+        //position des spielfelds
+        var rect = $(spielfeld).position();
+        //wird das fenster gescrollt?
+        var scroll = $(document).scrollTop();
+        
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top + scroll
+        };
+      }
+      
+      function spielfeldBereinigen() {
+        spielfeldContext.clearRect(0, 0, spielfeld.width, spielfeld.height);
+      }
+      
+      // Wird beibehalten zum Anzeigen der Koordinaten
+      spielfeld.addEventListener("mousemove", function(evt) {
+        var mausposition = holeMausPosition(evt);
+        
+        $('#x_koordinate').text('X: ' + Math.round(mausposition.x));
+        $('#y_koordinate').text('Y: ' + Math.round(mausposition.y));
+      });
+      
+      
+      //Zeichne Rechteck
+      
+      spielfeldContext.fillStyle = 'black';
+      spielfeldContext.fillRect(10,40,70,50);
+      
+      //Zeichne Kreis
+      
+      spielfeldContext.fillStyle= "green";
+      spielfeldContext.arc(150, 150, 50, 0, 2*Math.PI);
+      spielfeldContext.fill();
+    
+    </script>
+  </body>
+
+</html>
